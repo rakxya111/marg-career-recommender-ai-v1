@@ -1,0 +1,79 @@
+{% load static %} 
+
+{% block content %}
+<section class="blog">
+  <div class="head">
+    <div class="head-title">
+      <h2 class="blog-title">Marg Career Blog</h2>
+    </div>
+
+    <!-- Button to create the post -->
+    <div class="head-add">
+      <input type="text" placeholder="What's on your mind......" readonly />
+      <button class="open-modal-btn">+</button>
+    </div>
+  </div>
+
+  <!-- Form to create Post -->
+  <div class="modal" id="postModal">
+    <div class="modal-content">
+      <h2>Create Post</h2>
+
+      <form id="postForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form.media }}
+
+        {% for field in form %}
+        <div class="input-group">
+          {{ field.label_tag }} {{ field }} {% if field.errors %}
+          <div class="error">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="buttons">
+          <button class="cancel-btn" type="button">Cancel</button>
+          <button class="post-btn" type="submit">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- The Blog Post Listings -->
+  <div class="body-box">
+    {% for post in posts %}
+    <div class="body-box-item-1 body-box-item">
+      <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" />
+
+      <h3>
+        <a href="{% url 'post-detail' post.pk %}" class="post-title"
+          >{{ post.title }}</a
+        >
+      </h3>
+
+      <p>{{ post.description | striptags | truncatewords:40 }}</p>
+
+      <!-- Comments & Tags section -->
+      <div class="meta-info">
+        <span class="comments-count"
+          >{{ post.comment_set.count }} comments</span
+        >
+        <div class="tags">
+          {% for tag in post.tag.all %}
+          <span class="tag-item">{{ tag.name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <a href="{% url 'post-detail' post.pk %}" class="read-more-btn">
+        <span>Read more</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+    {% empty %}
+    <p>No posts available.</p>
+    {% endfor %}
+  </div>
+</section>
+
+
+{% endblock %}

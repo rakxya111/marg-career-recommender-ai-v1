@@ -1,0 +1,138 @@
+/* Remove unwanted space from browser defaults */
+body,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove gap around image */
+.head {
+  margin: 0;
+  padding: 0;
+}
+
+.head img {
+  width: 100%;
+  height: 200px;
+  display: block;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
+
+.parent-info {
+  padding: 35px 101px;
+}
+
+.info {
+  display: flex;
+  border: 1px;
+  border-radius: 30px;
+  background-color: #d9d9d9;
+  padding: 30px;
+  gap: 30px;
+}
+
+.left-info {
+  width: 60%;
+  padding: 10px ;
+}
+
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.right-info {
+  width: 30%;
+  padding: 10px 10px 10px 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail {
+  display: flex;
+  gap: 30px;
+}
+
+.name {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.email {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.message textarea {
+  resize: vertical;
+}
+
+/* #contactForm button { */
+.submit-button{
+  width: fit-content;
+  background-color: #000;
+  color: #fff;
+}
+
+.submit-button:hover{
+  background-color: #000000d7;
+}
+
+.name input,
+.email input,
+#contactForm textarea,
+#contactForm button {
+  padding: 8px 16px;
+  border-radius: 10px;
+}
+
+.location {
+  padding: 0px 101px 35px 101px;
+}
+
+#toast {
+  visibility: hidden;
+  min-width: 200px;
+  background-color: #09cb1f;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 16px;
+}
+
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from { bottom: 0; opacity: 0; }
+  to { bottom: 30px; opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { bottom: 30px; opacity: 1; }
+  to { bottom: 0; opacity: 0; }
+}

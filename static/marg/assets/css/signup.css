@@ -1,0 +1,156 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  height: 100vh;
+  width: 100vw;
+
+}
+
+/* Container */
+.container {
+  display: flex;
+  width: 95%;
+  max-width: 1400px;
+  min-height: 600px;
+  background-color: #000;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  overflow: hidden;
+  margin-top: 50px;
+  gap: 2rem; /* Space between panels */
+  padding: 1rem 2rem;
+}
+
+/* Left Panel */
+.left-panel {
+  flex: 0 0 40%; /* fixed 40% width */
+  background-color: #000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  min-width: 320px; /* prevent too narrow */
+}
+
+.left-panel h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.left-panel p {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #fff;
+  line-height: 1.3;
+}
+
+/* Right Panel */
+.right-panel {
+  flex: 1; /* take remaining width */
+  background-color: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* align top */
+  padding: 3rem 3rem;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  min-width: 450px; /* prevent too narrow */
+  max-width: 900px;
+  box-sizing: border-box;
+  overflow-y: auto; /* allow scrolling if content too tall */
+}
+
+.right-panel h1 {
+  font-size: 2.25rem;
+  margin-bottom: 1.25rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+/* Form */
+form {
+  max-width: 600px;
+  width: 100%;
+}
+
+.name-fields {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.input-group.full {
+  width: 100%;
+}
+
+.input-group .icon {
+  margin-right: 0.8rem;
+  font-size: 1.1rem;
+  color: grey;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1.1rem;
+  background-color: transparent;
+}
+
+/* Buttons */
+.btn {
+  display: block;
+  margin: 1rem auto 0 auto;
+  font-weight: bold;
+  background-color: #000000e8;
+  color: white;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+
+.btn:hover {
+  background-color: #000000c0;
+}
+
+/* Paragraphs and links */
+form p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+a:hover {
+  font-weight: bold;
+  color: #000;
+}
+
+form a {
+  text-decoration: underline;
+  color: #000;
+}

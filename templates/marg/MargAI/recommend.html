@@ -1,0 +1,35 @@
+{% extends "marg/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'marg/assets/css/quiz.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="quiz-wrapper">
+  <div class="quiz" >
+    <!-- Start Screen -->
+    <div id="start-screen">
+      <h2 class="text-center mb-4 title-marg">Welcome to the Marg Carrear Recommendation Quiz</h2>
+      <p class="text-center title-marg">Click below to get started!</p>
+      <div class="text-center">
+        <button id="start-btn" class="btn btn-success">Let’s Get Started</button>
+      </div>
+    </div>
+
+    <!-- Quiz Screen -->
+   <form id="quiz-form" action="{% url 'result' %}" method="POST" style="display: none;">
+      {% csrf_token %}
+      <h5 id="question-count"></h5>
+      <p id="question-text"></p>
+      <div id="options-container"></div>
+      <a href="#" id="next-btn" class="btn btn-primary">Next Question</a>
+      <button type="submit" id="done-btn" class="btn btn-success" style="display:none;">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'marg/assets/js/quiz.js' %}"></script>
+{% endblock %}

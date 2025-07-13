@@ -1,0 +1,87 @@
+{% extends 'marg/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'marg/assets/css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <main>
+      <div class="container">
+        <h1>About Us</h1>
+        <div class="items">
+          <div class="item-1 orange-box">
+            <h3>Vision Statement</h3>
+            <p>
+              At Marg, our vision is to transform the way individuals discover
+              their career journey. We strive to create a supportive space where
+              each person is empowered to choose a profession that reflects
+              their passion, purpose, and strengths—leading to both personal
+              fulfillment and long-term success.
+            </p>
+          </div>
+
+          <div class="item-2 gray-box">
+            <h3>Our Story</h3>
+            <p>
+              Marg began with a simple idea: career guidance should be personal,
+              practical, and accessible. Too often, people feel lost or
+              pressured when making career decisions. Our team made up of
+              educators, designers, and career coaches came together to create a
+              platform that offers clarity, support, and direction. Marg was
+              built to help individuals find a career path that truly fits them.
+            </p>
+          </div>
+
+          <div class="item-3 orange-box">
+            <div>
+            <h3>What Drives Us</h3>
+            <p>Our core values guide everything we do:</p>
+            <ul>
+              <li>
+                Purpose-Led Planning We help users choose careers that reflect
+                their values and strengths.
+              </li>
+              <li>
+                Empowerment Through Knowledge Simple tools and insights make
+                decision-making clear and confident.
+              </li>
+              <li>
+                Human-Centered Support Real people, real support—through
+                mentoring and guidance.
+              </li>
+              <li>
+                Adaptability & Growth We prepare users for a changing world with
+                future-ready skills.
+              </li>
+            </ul>
+            </div>
+          </div>
+
+          <div class="item-4 gray-box">
+            <h3>Mission Statement</h3>
+            <p>
+              Our mission is to help people find the right direction in their
+              careers by offering expert guidance, practical tools, and genuine
+              mentorship. We aim to become a trusted partner in every
+              individual’s professional journey helping them not just reach
+              success, but define it for themselves.
+            </p>
+          </div>
+
+          <div class="item-5 orange-box">
+            <h3>Target Audience Summary</h3>
+            <p>
+              Marg is designed for students, job seekers, and professionals at a
+              crossroads in their career. Whether you're choosing your first
+              path, shifting to a new one, or looking to grow in your current
+              field, Marg provides tailored guidance to help you move forward
+              with confidence and clarity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+{% endblock content %}

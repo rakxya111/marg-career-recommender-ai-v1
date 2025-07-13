@@ -1,0 +1,113 @@
+{% extends 'marg/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'marg/assets/css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="contact">
+  <div class="head">
+    <img src="{% static 'marg/assets/img/contactImage.png' %}" alt="contact-img" />
+  </div>
+
+  <div class="parent-info">
+    <div class="info">
+      <div class="left-info">
+        <div>
+          <h1>We would love to hear from you.</h1>
+          <p>
+            If you have any query or any type of suggestion, you can contact
+            us here. We would love to hear from you.
+          </p>
+        </div>
+
+        <form id="contactForm" method="post" action="">
+          {% csrf_token %}
+          <div class="detail">
+            <div class="name">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="form-control"
+                placeholder="Your Name"
+                value="{{ form.name.value|default_if_none:'' }}"
+                required
+              />
+              {{ form.name.errors }}
+            </div>
+
+            <div class="email">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                placeholder="Your Email"
+                value="{{ form.email.value|default_if_none:'' }}"
+                required
+              />
+              {{ form.email.errors }}
+            </div>
+          </div>
+
+          <div class="message">
+            <label for="message">Message</label>
+            <textarea
+              name="message"
+              id="message"
+              class="form-control"
+              placeholder="Message"
+              rows="4"
+              required
+            >{{ form.message.value|default_if_none:'' }}</textarea>
+            {{ form.message.errors }}
+          </div>
+
+          <button type="submit" class="submit-button" style="border-radius: 10px;">Send Message</button>
+        </form>
+      </div>
+
+      <div class="right-info">
+        <div class="right-info-up">
+          <h3>Visit Us</h3>
+          <p>
+            Bhaktapur Multiple Campus<br />
+            MCHC-077, Airport Road, Bhaktapur 44800<br />
+            Phone: +977 9801150484
+          </p>
+        </div>
+
+        <div class="right-info-down">
+          <h3>Get In Touch</h3>
+          <p>Email: marg@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="location">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.55933545929!2d85.41831597628892!3d27.669102376204528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1aa39515e461%3A0x8a1b8a0147782c1d!2z4KSt4KSV4KWN4KSk4KSq4KWB4KSwIOCkrOCkueClgeCkruClgeCkluClgCDgpJXgpY3gpK_gpL7gpK7gpY3gpKrgpLg!5e0!3m2!1sne!2snp!4v1752162826857!5m2!1sne!2snp"
+      width="100%"
+      height="300"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</section>
+
+<!-- Toast container -->
+<div id="toast"></div>
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'marg/assets/js/contact.js' %}"></script>
+{% endblock %}

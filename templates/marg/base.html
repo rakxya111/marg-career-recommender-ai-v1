@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Marg</title>
+  <link href="{% static 'marg/assets/css/bootstrap.min1.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'marg/assets/css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'marg/assets/img/favicon.ico' %}">
+  
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  {% include "marg/header.html" %}
+
+  {% block content %}
+  {% endblock %}
+
+  <!-- {% include "marg/footer.html" %} -->
+
+  <script src="{% static 'marg/assets/js/bootstrap.bundle.min.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

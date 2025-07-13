@@ -1,0 +1,57 @@
+{% extends 'marg/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'marg/assets/css/login.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="form-container">
+    <img
+      src="{% static 'marg/assets/img/FINAL-MARG-NAVBAR-LOGO-GIF.gif' %}"
+      alt="marg logo"
+      style="height: 100px; width: 350px; padding-bottom: 20px"
+    />
+    <h2>Sign In</h2>
+    <p>Welcome back! Please login.</p>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="input-group">
+        <label for="{{ form.username.id_for_label }}">
+          <i class="fas fa-envelope icon"></i> Username
+        </label>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+
+      <div class="input-group">
+        <label for="{{ form.password.id_for_label }}">
+          <i class="fa fa-lock icon"></i> Password
+        </label>
+        {{ form.password }}
+        {{ form.password.errors }}
+      </div>
+
+      <button type="submit" class="btn">Sign In</button>
+    </form>
+
+    <div class="signup-link">
+      <p>Don’t have an account? <a href="{% url 'register' %}">Sign up</a></p>
+    </div>
+  </div>
+
+  <div class="welcome-container">
+    <h3>Welcome Back!</h3>
+    <p>Enter your personal details and start your journey with us.</p>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'marg/assets/js/login.js' %}"></script>
+{% endblock %}

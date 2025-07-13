@@ -1,0 +1,123 @@
+body {
+  background: #f8f9fa;
+  background-image: url('../img/BackgroundQuiz2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+}
+
+/* Center container */
+.quiz-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa;
+  background-image: url('../img/BackgroundQuiz2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px;
+}
+
+/* Quiz box */
+.quiz {
+  width: 60%;
+  max-width: 700px;
+  height: 60vh;
+  background: white;
+  border-radius: 15px;
+  margin-top: -50px;
+  padding: 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Start screen */
+#start-screen {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 120px;
+  background-image: url('../img/BackgroundQuizPeople3.png');
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+#start-screen h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+
+
+#start-screen p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Question styling */
+#question-count {
+  font-size: 25px; /* ⬆️ Increase this as needed */
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+  
+}
+
+
+#question-text {
+  font-size: 20px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  text-align: left;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* Option buttons */
+.option-btn {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px 20px;
+  background: #f1f1f1;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  text-align: left;
+}
+
+.option-btn:hover {
+  background: #e2e6ea;
+}
+
+.option-btn.selected {
+  background: #28a745;
+  color: white;
+}
+
+/* Next/Done buttons */
+#next-btn,
+#done-btn {
+  margin-top: 30px;
+  align-self: flex-end;
+  font-size: 16px;
+  padding: 10px 25px;
+}
+
+.title-marg{
+  font-family: monospace;
+  font-weight: bold;
+}

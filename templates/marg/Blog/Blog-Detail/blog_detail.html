@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ post.title }}</title>
+  <link rel="stylesheet" href="{% static 'marg/assets/css/blog.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>{{ post.title }}</h1>
+    {% if post.featured_image %}
+      <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" style="max-width:400px;">
+    {% endif %}
+    <p>{{ post.description|safe }}</p>
+
+    <div class="meta-info">
+      <span>{{ post.comment_set.count }} comments</span>
+      <div>
+        {% for tag in post.tag.all %}
+          <span class="badge badge-primary">{{ tag }}</span>
+        {% empty %}
+          <span>No tags</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <a href="{% url 'post-list' %}">← Back to posts</a>
+  </div>
+</body>
+</html>

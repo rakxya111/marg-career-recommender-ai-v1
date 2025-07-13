@@ -1,0 +1,75 @@
+{% extends 'marg/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'marg/assets/css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="left-panel">
+    <img src="{% static 'marg/assets/img/FINAL-MARG-NAVBAR-LOGO-GIF.gif' %}" alt="marg logo" style="height: 100px; width: 350px; padding-bottom: 20px;">
+    <h2>Hello Friend!</h2>
+    <p>To keep connected with us,<br>please sign up with your personal information</p>
+  </div>
+
+  <div class="right-panel">
+    <h1>Create Account</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="name-fields">
+        <div class="input-group">
+          <i class="fas fa-user icon"></i>
+          {{ form.first_name }}
+          {{ form.first_name.errors }}
+        </div>
+        <div class="input-group">
+          <i class="fas fa-user icon"></i>
+          {{ form.last_name }}
+          {{ form.last_name.errors }}
+        </div>
+      </div>
+
+      <div class="input-group full">
+        <i class="fas fa-envelope icon"></i>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      
+      <div class="input-group full">
+        <i class="fas fa-envelope icon"></i>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+
+      <div class="input-group full">
+        <i class="fa fa-lock icon"></i>
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+      </div>
+
+      <div class="input-group full">
+        <i class="fa fa-lock icon"></i>
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+      </div>
+
+      <div class="input-group full">
+        <label>Profile Image</label>
+        {{ form.profile_image }}
+        {{ form.profile_image.errors }}
+      </div>
+
+      <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+      <button type="submit" class="btn signup-btn">Sign Up</button>
+
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'marg/assets/js/signup.js' %}"></script>
+{% endblock %}

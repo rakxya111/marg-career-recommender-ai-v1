@@ -1,0 +1,169 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  width: 95%;
+  max-width: 1500px;
+  height: 600px;
+  background-color: #000;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.form-container {
+  flex: 3;
+  margin-right: 10px;
+  padding: 50px;
+  background: #fff;
+  border-radius: 50px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.form-container h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.form-container p {
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Label above input */
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* Icons in label */
+.input-group label .icon {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Input styling */
+.input-group input {
+  padding: 12px 15px 12px 40px; /* left padding for icon */
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Show icon inside input */
+.input-group label .icon {
+  position: absolute;
+  left: 12px;
+  top: 38px; /* adjust to center vertically with input */
+  pointer-events: none;
+  z-index: 2;
+  color: #999;
+}
+
+/* Move icon to inside input */
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  padding-left: 40px; /* space for icon */
+}
+
+/* On input focus */
+.input-group input:focus {
+  border-color: #000;
+}
+
+/* Submit button */
+button.btn {
+  background-color: #000000e8;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+
+button.btn:hover {
+  background-color: #000000c0;
+}
+
+/* Signup link */
+.signup-link {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.signup-link a {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  color: #00000085;
+}
+
+/* Welcome container styling */
+.welcome-container {
+  flex: 2;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px;
+}
+
+.welcome-container h3 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.welcome-container p {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 1.5;
+}
