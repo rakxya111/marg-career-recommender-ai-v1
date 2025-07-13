@@ -20,7 +20,9 @@ body {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 50px;
   overflow: hidden;
+  margin-top: 50px;
 }
+
 
 .form-container {
   flex: 3;

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'blogapp',    
     'margapp',
     'accounts',
+    'dashboard',
 ]
 
 REST_FRAMEWORK = {
