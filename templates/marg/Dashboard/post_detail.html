@@ -1,0 +1,35 @@
+{% extends 'marg/Dashboard/header.html' %}
+{% block content %}
+
+<div class="main-content" id="main-content">
+    <h2>Post Detail</h2>
+    
+    <div class="container mt-5">
+       
+        <div class="row">
+           
+            <div class="col-md-10">
+                <div class="post-card">
+                    <img src="{{ post.featured_image.url }}" alt="Featured Image" class="featured-image" width="800px">
+                    <h5>{{ post.title }}</h5>
+                    <p><strong>Tags:</strong> {{ post.tag.all|join:", " }}</p>
+                    <p>{{ post.content| safe | linebreaksbr }}</p>
+                   
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="action-buttons">
+                    <td class="action-buttons">
+                        <a href="{% url 'post-update' post.pk %}" title="Edit this Post" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square" title="click to edit"></i></a>
+                        <a href="{% url 'post-delete' post.pk %}" title="Delete this Post" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash" title="click to Delete"></i></a>
+                        <a href="{% url 'post-publish-view' post.pk %}" class="btn btn-success"><i class="fa-solid fa-square-plus" title="click to Save"></i></a>
+                   
+                      </td>
+                   
+                </div>
+               </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

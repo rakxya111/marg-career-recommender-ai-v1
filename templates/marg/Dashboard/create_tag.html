@@ -1,0 +1,16 @@
+{% extends "marg/Dashboard/header.html" %}
+{% block content %}
+
+<div class="main-content" id="main-content">
+<h2 style="background-color: #FF4500; text-align: center; color: aliceblue; font-weight: bold; margin-top: -30px; margin-bottom: 50px; border-radius: 50px;">Create/Edit Tag</h2>
+
+<form  method="post" class="post-form" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+</div>
+
+
+
+{% endblock content %}

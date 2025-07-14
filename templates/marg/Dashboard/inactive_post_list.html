@@ -1,0 +1,43 @@
+    {% extends 'marg/Dashboard/header.html' %}
+
+
+    {% block content %}
+    
+    <div class="main-content" id="main-content">
+        <header>
+            Manage Your Dashboard
+        </header>
+        <!-- <h2>InActive Post List</h2>
+        <a href="{% url 'post-create' %}" class="btn btn-success">Add New Post</a> -->
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Featured Image</th>
+                    <th>Title</th>
+                    <th>Tags</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+               {% for post in posts1 %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'post-detail' post.pk %}"></a><img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="featured-image" width="100px"></td></a>
+                    <td>{{ post.title | truncatewords:20 }}</td>
+                    <td>{{ post.tag.all|join:"," }}</td>
+                    <td>
+
+                    <a href="{% url 'make-active-view' post.pk %}" class="btn btn-success" title="Click to Activate">Activate</a>
+                    
+                </td>
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock content %}

@@ -1,0 +1,43 @@
+{% extends "marg/Dashboard/header.html" %}
+{% block content %}
+
+   <!-- Main Content -->
+   <div class="main-content" id="main-content">
+    <header>
+        Manage Your Tags
+    </header>
+    <h2>Tag List</h2>
+    <a href="{% url 'tag-create' %}" class="btn btn-success">Add New Tag</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Tags</th>
+                <th>Action</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Demo Data -->
+            {% for tag in tags %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+               
+                <td>{{ tag.name|title }}</td>
+                
+                
+                <td>
+                    <a href="{% url 'tag-update' tag.pk %}" class="btn btn-success"><i class="fa-solid fa-pen-to-square" title="click to edit"></i></a>
+                    <a href="{% url 'tag-delete' tag.pk %}" class="btn btn-danger"><i class="fa-solid fa-trash" title="click to Delete"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}

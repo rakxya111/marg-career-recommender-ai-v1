@@ -6,11 +6,12 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
     path('', include('blogapp.urls')),
     path('ai/', include('margapp.urls')),
+    path('', include('dashboard.urls')),
     path('accounts/', include('accounts.urls')),
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'marg/assets/img/favicon.ico')),
-    path('summernote/', include('django_summernote.urls')),
 ]
 
 if settings.DEBUG:

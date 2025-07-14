@@ -1,0 +1,43 @@
+    {% extends 'marg/Dashboard/header.html' %}
+
+
+    {% block content %}
+    
+    <div class="main-content" id="main-content">
+        <header>
+            Manage Your Dashboard
+        </header>
+        <h2>Post List</h2>
+        <a href="{% url 'post-create' %}" class="btn btn-success" ><i class="fa-solid fa-plus"></i> Add New Post</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Featured Image</th>
+                    <th>Title</th>
+                    <th>Tags</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+               {% for post in posts %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'post-detail' post.pk %}"></a><img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="featured-image" width="100px"></td></a>
+                    <td>{{ post.title | truncatewords:20 }}</td>
+                    <td>{{ post.tag.all|join:"," }}</td>
+                    <td>
+                    <a href="{% url 'post-update' post.pk %}" class="btn btn-success"><i class="fa-solid fa-pen-to-square" title="click to edit"></i></a>
+                    <a href="{% url 'post-delete' post.pk %}" class="btn btn-danger"><i class="fa-solid fa-trash" title="click to Delete"></i></a>
+                    <a href="{% url 'de-active-view' post.pk %}" class="btn btn-danger btn btn-outline-warning" style="margin-top: 10px;" title="click to Deactivate"> Deactivate </a>
+                    </td>
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock content %}
