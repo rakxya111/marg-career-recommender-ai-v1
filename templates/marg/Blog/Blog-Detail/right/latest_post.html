@@ -1,29 +1,16 @@
     <div class="sidebar-widget latest-post card border-0 p-4 mb-3">
       <h5>Latest Posts</h5>
 
-      <div class="media border-bottom py-3">
-        <a href="#"><img class="mr-4" src="images/blog/bt-3.jpg" alt="" /></a>
+      {% for post in latest_post %}
+
+      <div class="media border-bottom py-3" >
+        <a href="{% url 'post-detail' post.pk %}"><img class="mr-4" src="{{ post.featured_image.url }}" alt="" style="height: 100px; width: auto" /></a>
         <div class="media-body">
-          <h6 class="my-2"><a href="#">Thoughtful living in los Angeles</a></h6>
-          <span class="text-sm text-muted">03 Mar 2018</span>
+          <h6 class="my-2"><a href="#">{{ post.title |truncatewords:4 }}</a></h6>
+          <span class="text-sm text-muted">{{ post.published_at|date:"jS F, Y" }}</span>
         </div>
       </div>
 
-      <div class="media border-bottom py-3">
-        <a href="#"><img class="mr-4" src="images/blog/bt-2.jpg" alt="" /></a>
-        <div class="media-body">
-          <h6 class="my-2"><a href="#">Vivamus molestie gravida turpis.</a></h6>
-          <span class="text-sm text-muted">03 Mar 2018</span>
-        </div>
-      </div>
+      {% endfor %}
 
-      <div class="media py-3">
-        <a href="#"><img class="mr-4" src="images/blog/bt-1.jpg" alt="" /></a>
-        <div class="media-body">
-          <h6 class="my-2">
-            <a href="#">Fusce lobortis lorem at ipsum semper sagittis</a>
-          </h6>
-          <span class="text-sm text-muted">03 Mar 2018</span>
-        </div>
-      </div>
     </div>

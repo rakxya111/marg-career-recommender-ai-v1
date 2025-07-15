@@ -1,0 +1,346 @@
+:root {
+  --primary-color: #f7941d;
+  --dark-color: #121212;
+  --gray-bg: #f8f9fa;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #F9F4E7;
+  overflow-x: hidden;
+}
+
+
+/* Hero section */
+.hero-section {
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align items to left */
+  background-color: rgb(238, 211, 170);
+  color: black;
+  height: 665px;
+  width: 100%;
+  padding: 0 3rem; /* Add horizontal padding */
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible; /* allow image overflow */
+  z-index: 1;
+}
+
+.hero-section .container {
+  flex: 0 0 40%; /* container width ~40% */
+  max-width: 40%;
+  padding-right: 2rem;
+  box-sizing: border-box;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center container */
+  height: 100%;
+
+  text-align: center; /* center-align all text inside */
+  align-items: center; /* center horizontally */
+}
+
+.hero-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 auto 0.5rem auto; /* Center the heading block */
+  text-align: center;         /* Use center instead of justify */
+  max-width: 420px;           /* Constrain width to create 2 lines */
+  line-height: 1.3;
+  word-break: normal;
+}
+
+.hero-section p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  max-width: 80%; /* limit paragraph width */
+}
+
+.hero-section .btn-warning {
+  background-color: #000; /* black button */
+  color: #fff;
+  border: none;
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 3;
+  display: inline-block;
+}
+
+.hero-section .hero-img {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: end;
+  /* justify-content: flex-start; align image to left within the space */
+  z-index: 1;
+  height: 100%;
+  /* bottom: 0; */
+}
+
+.hero-section .hero-img img {
+  width: auto;
+  max-width: none;
+  height: 600px; /* big height to match */
+  object-fit: contain;
+  object-position: center bottom;
+  user-select: none;
+  position: absolute;
+  bottom: 0;
+}
+
+/* Responsive: stack vertically on smaller screens */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem;
+  }
+
+  .hero-section .container,
+  .hero-section .hero-img {
+    max-width: 100%;
+    flex: 1 1 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-section .hero-img img {
+    height: auto;
+    max-width: 90%;
+  }
+
+  .hero-section p {
+    max-width: 100%;
+  }
+}
+
+.hero-section::before,
+.hero-section::after {
+  content: "";
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 1; /* Increased visibility */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-section::before {
+  top: 4%;
+  left: 25%; /* shift toward center */
+  width: 400px;
+  height: 400px;
+  background-image: url('../img/bag.png'); /* Update with correct path */
+}
+
+.hero-section::after {
+  bottom: 1%;
+  left: 2%; /* shift toward center */
+  width: 280px;
+  height: 280px;
+  background-image: url('../img/pencil.png'); /* Update with correct path */
+}
+
+
+
+
+
+/* Our Success section */
+.stats-section {
+  background: #f8f3e8;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.stats-section h2 {
+  margin-bottom: 40px;
+  font-weight: 600;
+  color: #000;
+}
+
+.stats-section .container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stats-section .container > div {
+  flex: 1 1 150px;
+  min-width: 150px;
+  padding: 30px 20px;
+  color: #000;
+}
+
+.stats-section .container > div:nth-child(odd) {
+  background: #f2f2f2; /* light gray */
+}
+
+.stats-section .container > div:nth-child(even) {
+  background: #fff; /* white */
+}
+
+.stats-section h3 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.stats-section p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+
+/* How it works css */
+.how-it-works .container {
+  background-color: var(--primary-color); /* e.g. #ff8c00 */
+  color: white;
+  padding: 4rem 2rem;
+  border-radius: 20px;
+}
+
+.how-step {
+  text-align: center;
+  color: white;
+  padding: 1rem;
+}
+
+.icon-circle {
+  background-color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle img {
+  width: 28px;
+  height: 28px;
+}
+
+.how-it-works h5 {
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.how-it-works p {
+  font-size: 0.9rem;
+  color: white;
+}
+
+
+/* Featured career css */
+.featured-careers-section {
+  padding: 4rem 1rem;
+  background-color: #F9F4E7;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.career-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.career-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.career-img {
+  max-width: 280px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  transform: rotate(-25deg);
+  clip-path: ellipse(50% 40% at 50% 50%);
+}
+
+.career-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: rotate(25deg); /* Counter rotation to keep image upright */
+}
+
+
+
+
+/* Optional: you can use blob mask via clip-path */
+/* .career-img img {
+  clip-path: path(
+    'M46.2,-73.5C58.6,-64.7,67.5,-49.4,70.4,-34.5C73.4,-19.6,70.4,-4.9,67.7,8.6C65,22.1,62.7,34.3,55.2,44.8C47.7,55.2,35.1,63.8,21.3,68.9C7.6,74,-7.2,75.5,-22.5,71.7C-37.9,67.9,-53.8,58.7,-60.9,45.9C-68,33.1,-66.4,16.6,-68.3,0.2C-70.1,-16.2,-75.4,-32.4,-70.2,-44.2C-65,-56,-49.3,-63.5,-34.3,-69.1C-19.2,-74.7,-9.6,-78.3,4.2,-84.2C17.9,-90.2,35.9,-98.2,46.2,-73.5Z'
+  );
+} */
+
+.career-content {
+  flex: 2;
+  min-width: 280px;
+}
+
+.career-content h5 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.career-content p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.career-content .btn {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+  border-radius: 25px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.career-content .btn:hover {
+  background-color: #111111d5;
+  transform: translateY(-2px);
+}
+
+
+/* Testimonial section */
+.testimonial-section .container {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 1rem;
+  text-align: center; /* Optional: center-align the image */
+}
+
+.testimonial-section .container img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px; /* Optional: rounded edges */
+}

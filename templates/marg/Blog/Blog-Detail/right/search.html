@@ -1,4 +1,9 @@
-    <div class="sidebar-widget search card p-4 mb-3 border-0">
-      <input type="text" class="form-control" placeholder="search" />
-      <a href="#" class="btn btn-mian btn-small d-block mt-2">search</a>
-    </div>
+<div class="sidebar-widget search card p-4 mb-3 border-0">
+  <form action="{% url 'post-search' %}" method="get">
+    <input type="text" class="form-control" placeholder="search anything.." />
+
+    <button class="btn btn-mian btn-small d-block mt-2" type="submit">
+      Search
+    </button>
+  </form>
+</div>

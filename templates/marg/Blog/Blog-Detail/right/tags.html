@@ -1,12 +1,8 @@
     <div class="sidebar-widget bg-white rounded tags p-4 mb-3">
       <h5 class="mb-4">Tags</h5>
+        {% for tag in tags %}
+      
+        <a href="{% url 'post-by-tag' tag.id %}">{{ tag.name }}</a>
 
-      <a href="#">Web</a>
-      <a href="#">agency</a>
-      <a href="#">company</a>
-      <a href="#">creative</a>
-      <a href="#">html</a>
-      <a href="#">Marketing</a>
-      <a href="#">Social Media</a>
-      <a href="#">Branding</a>
+      {% endfor %}
     </div>

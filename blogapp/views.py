@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from blogapp.models import Post , Tag
-from django.views.generic import ListView,TemplateView,DetailView,View, CreateView
+from blogapp.models import Post , Tag , Comment
+from django.views.generic import ListView,TemplateView,DetailView,View, UpdateView , FormView
 from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator, PageNotAnInteger
@@ -11,11 +11,23 @@ from .forms import PostForm , ContactForm , CommentForm ,NewLetterForm
 from django.views.generic.edit import FormMixin
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 
 
 
-class HomeView(TemplateView):
-    template_name = 'marg/base.html'
+
+# class HomeView(TemplateView):
+#     template_name = 'marg/base.html'
+
+class HomeView(ListView):
+    model = Post
+    template_name = 'marg/home.html'
+    context_object_name = 'posts'
+    queryset = Post.objects.filter(
+        published_at__isnull=False, status="active"
+        ).order_by("-published_at")
+
 
 class AboutView(TemplateView):
     template_name = 'marg/about.html'
@@ -60,19 +72,19 @@ class PostListCreateView(LoginRequiredMixin,ListView):
             return self.render_to_response(context) #Re-renders the page with the error messages.
 
 
-class PostByTagView(LoginRequiredMixin,ListView):
+class PostByTagView(LoginRequiredMixin, ListView):
     model = Post
-    template_name = 'marg/Blog/BlogList/bloglist.html'
+    template_name = 'marg/Blog/blog.html'
     context_object_name = "posts"
 
     def get_queryset(self):
         query = super().get_queryset()
-        query = query.filter(
+        return query.filter(
             published_at__isnull=False,
             status='active',
             tag__id=self.kwargs['tag_id'],
-        ).order_by['-published_at']
-        return query
+        ).order_by('-published_at')
+
 
 
 class ContactView(View):
@@ -102,77 +114,134 @@ class ContactView(View):
             {"form": form}
         )
 
-class PostDetailView(LoginRequiredMixin,DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'marg/Blog/Blog-Detail/blog_detail.html'
     context_object_name = 'post'
 
     def get_queryset(self):
         query = super().get_queryset()
-        query = query.filter(published_at__isnull=False,
-        status='active')
-        return query
-    
+        return query.filter(published_at__isnull=False, status='active')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         obj = self.get_object()
+
+        # Fetch the current user's comment (if any) on this post
+        user_comment = Comment.objects.filter(post=obj, user=self.request.user).first()
+
+        # Pass it to the context
+        context['user_comment'] = user_comment
+        context['form'] = CommentForm(instance=user_comment) if user_comment else CommentForm()
+
+        context['latest_post'] = (
+            Post.objects.filter(
+                published_at__isnull=False , status='active'
+            ).order_by('-published_at')[:5]
+        )
+
+        context['tags'] = Tag.objects.all()[:8]
+
+        # For next/previous post navigation
         context['previous_post'] = (
             Post.objects.filter(
                 published_at__isnull=False, status='active',
                 id__lt=obj.id
-            ).order_by('-id')
-            .first()
+            ).order_by('-id').first()
         )
-
         context['next_post'] = (
             Post.objects.filter(
                 published_at__isnull=False, status='active',
                 id__gt=obj.id
-            ).order_by('id')
-            .first()
+            ).order_by('id').first()
         )
         return context
 
-class CommentView(View):
+
+
+class CommentView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
-        form = CommentForm(request.POST)
-        post_id = request.POST['post']
-        if form.is_valid():
-            form.save()
-            return redirect('post-detail',post_id)
-        
-        post = Post.objects.get(pk=post_id)
-        return render(
-            request,
-            'marg/Blog/Blog-Detail/blog_detail.html',
-            {'post':post, 'form':form} ,
-        )
-    
+        action = request.POST.get("action")
+        post_id = request.POST.get("post_id")
+        post = get_object_or_404(Post, id=post_id)
+
+        # Fetch current user's comment on this post (if exists)
+        existing_comment = Comment.objects.filter(post=post, user=request.user).first()
+
+        # --- CREATE ---
+        if action == "create":
+            if existing_comment:
+                messages.error(request, "You have already commented on this post.")
+            else:
+                form = CommentForm(request.POST, request.FILES)
+                if form.is_valid():
+                    comment = form.save(commit=False)
+                    comment.user = request.user
+                    comment.post = post
+                    comment.save()
+                    messages.success(request, "Comment added successfully!")
+                else:
+                    messages.error(request, "Please correct the errors in your comment.")
+
+        # --- UPDATE ---
+        elif action == "update":
+            if not existing_comment:
+                messages.error(request, "You haven't commented yet.")
+            else:
+                form = CommentForm(request.POST, request.FILES, instance=existing_comment)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Comment updated successfully!")
+                else:
+                    messages.error(request, "Error updating comment.")
+
+        # --- DELETE ---
+        elif action == "delete":
+            if not existing_comment:
+                messages.error(request, "No comment found to delete.")
+            else:
+                existing_comment.delete()
+                messages.success(request, "Comment deleted.")
+
+        else:
+            messages.error(request, "Invalid action.")
+
+        return redirect("post-detail", pk=post.pk)
+
+
+
+  
 class PostSearchView(View):
     template_name = 'marg/Blog/blog.html'
 
-    def get(self,request,*args,**kwargs):
-        query = request.GET['query']
+    def get(self, request, *args, **kwargs):
+        # Use .get() with default to avoid MultiValueDictKeyError
+        query = request.GET.get('query', '').strip()
+
         post_list = Post.objects.filter(
-            (Q(title__icontains=query) | Q(description__icontains=query))
-            & Q(status='active')
-            & Q(published_at__isnull=False)
+            Q(title__icontains=query) | Q(description__icontains=query),
+            status='active',
+            published_at__isnull=False
         ).order_by('-published_at')
 
-        page = request.GET.get('page',1)
-        paginate_by = 3
-        paginator = Paginator(post_list,paginate_by)
+        paginator = Paginator(post_list, 3)
+        page = request.GET.get('page', 1)
+
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
             posts = paginator.page(1)
-        
+
         return render(
             request,
             self.template_name,
-            {'page_obj':posts, 'query': query},
+            {
+                'page_obj': posts,
+                'query': query,
+                'form': PostForm(),
+            }
         )
-
+    
 class NewsletterView(View):
    
     def post(self, request):

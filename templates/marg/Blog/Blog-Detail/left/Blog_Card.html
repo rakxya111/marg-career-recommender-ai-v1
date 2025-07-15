@@ -1,4 +1,6 @@
 
+<!-- POSTS -->
+
     <div class="col-lg-12 mb-5">
       <div class="single-blog-item">
         <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="img-fluid rounded" />
@@ -20,20 +22,23 @@
             <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a>
           </h2>
           <p class="lead mb-4">
-            {{ post.description | linebreaks }} 
+            {{ post.description | safe }} 
           </p>
 
-          {% for tag in pot %}
+
+          <!-- TAGS  -->
 
           <div class="tag-option mt-5 clearfix">
-            <ul class="float-left list-inline">
-              <li>Tags:</li>
-              <li class="list-inline-item">
-                <a href="{% url 'post-by-tag' tag.id %}" rel="tag">{{ tag.name|lower }}</a>
-              </li>
+              <span>Tags:</span>
+              <ul class="float-left list-inline">
+                {% for tag in post.tag.all %}
+                  <li class="list-inline-item">
+                    <a href="{% url 'post-by-tag' tag.id %}" rel="tag">{{ tag.name|lower }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
 
-            </ul>
-            {% endfor %}
 
 
             <!-- Socials  -->

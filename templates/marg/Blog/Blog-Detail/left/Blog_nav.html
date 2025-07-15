@@ -2,23 +2,29 @@
       <div
         class="posts-nav bg-white p-5 d-lg-flex d-md-flex justify-content-between"
       >
-        <a class="post-prev align-items-center" href="#">
+      {% if previous_post %}
+        <a class="post-prev align-items-center" href="{% url 'post-detail' previous_post.pk %}">
           <div class="posts-prev-item mb-4 mb-lg-0">
             <span class="nav-posts-desc text-color">- Previous Post</span>
             <h6 class="nav-posts-title mt-1">
-              Donec consectetuer ligula <br />vulputate sem tristique.
+              {{ previous_post.title|truncatewords:8 }}
             </h6>
           </div>
         </a>
-        <div class="border"></div>
-        <a class="posts-next" href="#">
+        {% endif %}
+        <div class="border" style="margin-right: 10px;"></div>
+        {% if next_post %}
+        <a class="posts-next" href="{% url 'post-detail' next_post.pk %}">
           <div class="posts-next-item pt-4 pt-lg-0">
             <span
               class="nav-posts-desc text-lg-right text-md-right text-color d-block"
               >- Next Post</span
             >
-            <h6 class="nav-posts-title mt-1">Ut aliquam sollicitudin leo.</h6>
+            <h6 class="nav-posts-title mt-1">
+              {{ next_post.title|truncatewords:8 }}
+            </h6>
           </div>
         </a>
+        {% endif %}
       </div>
     </div>

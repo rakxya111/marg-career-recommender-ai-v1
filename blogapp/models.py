@@ -37,14 +37,16 @@ class Post(TimeStampModel):
     def __str__(self):
         return self.title
 
+
 class Comment(TimeStampModel):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='user_images/%Y/%m/%d', blank=False)
     comment = models.TextField()
-    email = models.EmailField()
 
     def __str__(self):
-        return f"{self.email} | {self.comment[:7]}"
+        return f"{self.comment[:7]}"
+
 
 class Contact(TimeStampModel):
     message = models.TextField()

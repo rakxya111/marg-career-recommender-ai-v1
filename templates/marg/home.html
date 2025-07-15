@@ -1,0 +1,20 @@
+{% extends 'marg/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+ <link href="{% static 'marg/assets/css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    {% include 'marg/Home/Hero.html' %}
+    {% include 'marg/Home/Success_Stats.html' %}
+    {% include 'marg/Home/How_Works.html' %}
+    {% include 'marg/Home/Featured_Careers.html' %}
+    {% include 'marg/Home/Testimonial.html' %}
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'marg/assets/js/home.js' %}"></script>
+{% endblock %}

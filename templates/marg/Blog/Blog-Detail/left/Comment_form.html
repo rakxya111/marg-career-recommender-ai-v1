@@ -1,46 +1,82 @@
-    <div class="col-lg-12">
-      <form class="contact-form bg-white rounded p-5" id="comment-form">
-        <h4 class="mb-4">Write a comment</h4>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <input
-                class="form-control"
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Name:"
-              />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <input
-                class="form-control"
-                type="text"
-                name="mail"
-                id="mail"
-                placeholder="Email:"
-              />
-            </div>
-          </div>
+{% load static %}
+<div class="col-lg-12">
+  <form
+    class="contact-form bg-white rounded p-5"
+    id="comment-form"
+    method="POST"
+    action="{% url 'comment-view' %}"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <input type="hidden" name="post_id" value="{{ post.id }}">
+    <input type="hidden" name="action" id="comment_action" value="create">
+
+    <h4 class="mb-4">Write a comment</h4>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            class="form-control"
+            type="text"
+            id="email"
+            value="{{ request.user.email }}"
+            readonly
+          />
         </div>
+      </div>
+    </div>
 
-        <textarea
-          class="form-control mb-3"
-          name="comment"
-          id="comment"
-          cols="30"
-          rows="5"
-          placeholder="Comment"
-        ></textarea>
+    <div class="form-group">
+      <textarea
+        class="form-control mb-3"
+        name="comment"
+        id="comment"
+        cols="30"
+        rows="5"
+        placeholder="Comment"
+      >{{ form.comment.value|default_if_none:'' }}</textarea>
+      {{ form.comment.errors }}
+    </div>
 
+    <div class="form-group">
+      <label for="image">Upload Image (optional):</label>
+      <input class="form-control-file" type="file" name="image" id="image" />
+      {{ form.image.errors }}
+    </div>
+
+    <!-- Action Buttons: Show conditionally -->
+    <div class="form-group d-flex gap-2" style="margin-top: 20px;">
+      {% if not user_comment %}
+        <!-- Only show Add if no comment exists -->
         <input
           class="btn btn-main btn-round-full"
           type="submit"
-          name="submit-contact"
-          id="submit_contact"
-          value="Submit Message"
+          value="Add"
+          onclick="setCommentAction('create')"
         />
-      </form>
+      {% else %}
+        <!-- Only show Update and Delete if comment exists -->
+        <input
+          class="btn btn-warning btn-round-full"
+          type="submit"
+          value="Update"
+          onclick="setCommentAction('update')"
+        />
+        <input
+          class="btn btn-danger btn-round-full"
+          type="submit"
+          value="Delete"
+          onclick="setCommentAction('delete')"
+        />
+      {% endif %}
     </div>
+  </form>
+</div>
+
+<script>
+  function setCommentAction(actionType) {
+    document.getElementById("comment_action").value = actionType;
+  }
+</script>
