@@ -1,4 +1,4 @@
-from .models import Post, Tag , Contact , Newletter
+from .models import Post, Tag , Contact , Newletter , Comment
 from django import forms
 from django_summernote.widgets import SummernoteWidget
 
@@ -56,4 +56,9 @@ class ContactForm(forms.ModelForm):
 class NewLetterForm(forms.ModelForm):
     class Meta:
         model = Newletter
+        fields = '__all__'
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
         fields = '__all__'

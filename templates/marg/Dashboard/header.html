@@ -7,32 +7,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Marg Dashboard</title>
     <link href="{% static 'marg/assets/fonts/css2.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'marg/assets/css/dashboard.css' %}" />
-     <link rel="stylesheet" href="{% static 'marg/assets/css/fontawesome/fontawesome.min.css' %}">
-     <link rel="stylesheet" href="{% static 'marg/assets/css/fontawesome/fontawesome.css' %}">
-     <link rel="stylesheet" href="{% static 'marg/assets/css/fontawesome/all.min.css' %}">
-     <link rel="stylesheet" href="{% static 'marg/assets/js/fontawesome/fontawesome.min.js' %}">
-     <link rel="stylesheet" href="{% static 'marg/assets/js/fontawesome/fontawesome.js' %}">
-     <link rel="stylesheet" href="{% static 'marg/assets/js/fontawesome/all.min.js' %}">
-     <!-- Font Awesome CDN -->
-        <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        />
-
+    <link
+      rel="stylesheet"
+      href="{% static 'marg/assets/css/dashboard.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'marg/assets/css/fontawesome/fontawesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'marg/assets/css/fontawesome/fontawesome.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'marg/assets/css/fontawesome/all.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'marg/assets/js/fontawesome/fontawesome.min.js' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'marg/assets/js/fontawesome/fontawesome.js' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'marg/assets/js/fontawesome/all.min.js' %}"
+    />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-        <div>
-            <img src="{% static 'marg/assets/img/FINAL-MARG-NAVBAR-LOGO-GIF.gif' %}" alt="" style="height:70px; width: 250px; margin-top: 50px;">
-        </div>
-      
-        <div style="padding-left: 200px; padding-top: 20px;">
-        <a href="/"><i class="fa-solid fa-house" style="color: #cba62c;"></i></a>
-        </div>
-      
-      <a href="{% url 'dashboard' %}"><h2 style="margin-top: 40px; color: #cba62c; margin-left: -70px; text-decoration: underline black;">Dashboard</h2></a>
+      <div>
+        <img
+          src="{% static 'marg/assets/img/FINAL-MARG-NAVBAR-LOGO-GIF.gif' %}"
+          alt=""
+          style="
+            height: 70px;
+            width: 250px;
+            margin-top: 65px;
+            margin-left: -10px;
+          "
+        />
+      </div>
+
+      <div style="padding-left: 200px; padding-top: 20px; margin-top: 30px">
+        <a href="/"><i class="fa-solid fa-house" style="color: #ffffff"></i></a>
+      </div>
+
+      <div style="margin-top: -64px">
+        <a href="{% url 'dashboard' %}"
+          ><h2
+            style="
+              margin-top: 40px;
+              color: #ffffff;
+              margin-left: -70px;
+              text-decoration: underline black;
+            "
+          >
+            Dashboard
+          </h2></a
+        >
+      </div>
       <ul>
         <li>
           <a href="{% url 'dashboard' %}">Home</a>
@@ -46,20 +88,14 @@
         <li>
           <a href="{% url 'inactive-post-view' %} "> In-Active Posts </a>
         </li>
-
       </ul>
     </div>
 
     <!-- Toggle Button -->
     <button class="toggle-btn" id="toggle-btn">☰</button>
 
-  
-
-      {% block content %}
-      {% endblock content %}
-
-    
+    {% block content %} {% endblock content %}
 
     <script src="{% static 'marg/assets/js/dashboard.js' %}"></script>
-</body>
+  </body>
 </html>

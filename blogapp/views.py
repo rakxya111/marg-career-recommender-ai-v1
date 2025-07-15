@@ -7,7 +7,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator, PageNotAnInteger
 from django.db.models import Q
-from .forms import PostForm , ContactForm
+from .forms import PostForm , ContactForm , CommentForm ,NewLetterForm
 from django.views.generic.edit import FormMixin
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -60,11 +60,6 @@ class PostListCreateView(LoginRequiredMixin,ListView):
             return self.render_to_response(context) #Re-renders the page with the error messages.
 
 
-class PostDetailView(LoginRequiredMixin,DetailView):
-    model = Post
-    template_name = 'marg/Blog/Blog-Detail/blog_detail.html'
-    context_object_name = 'post'
-
 class PostByTagView(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'marg/Blog/BlogList/bloglist.html'
@@ -106,8 +101,109 @@ class ContactView(View):
             self.template_name,
             {"form": form}
         )
+
+class PostDetailView(LoginRequiredMixin,DetailView):
+    model = Post
+    template_name = 'marg/Blog/Blog-Detail/blog_detail.html'
+    context_object_name = 'post'
+
+    def get_queryset(self):
+        query = super().get_queryset()
+        query = query.filter(published_at__isnull=False,
+        status='active')
+        return query
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj = self.get_object()
+        context['previous_post'] = (
+            Post.objects.filter(
+                published_at__isnull=False, status='active',
+                id__lt=obj.id
+            ).order_by('-id')
+            .first()
+        )
+
+        context['next_post'] = (
+            Post.objects.filter(
+                published_at__isnull=False, status='active',
+                id__gt=obj.id
+            ).order_by('id')
+            .first()
+        )
+        return context
+
+class CommentView(View):
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        post_id = request.POST['post']
+        if form.is_valid():
+            form.save()
+            return redirect('post-detail',post_id)
+        
+        post = Post.objects.get(pk=post_id)
+        return render(
+            request,
+            'marg/Blog/Blog-Detail/blog_detail.html',
+            {'post':post, 'form':form} ,
+        )
     
+class PostSearchView(View):
+    template_name = 'marg/Blog/blog.html'
+
+    def get(self,request,*args,**kwargs):
+        query = request.GET['query']
+        post_list = Post.objects.filter(
+            (Q(title__icontains=query) | Q(description__icontains=query))
+            & Q(status='active')
+            & Q(published_at__isnull=False)
+        ).order_by('-published_at')
+
+        page = request.GET.get('page',1)
+        paginate_by = 3
+        paginator = Paginator(post_list,paginate_by)
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        
+        return render(
+            request,
+            self.template_name,
+            {'page_obj':posts, 'query': query},
+        )
+
+class NewsletterView(View):
+   
+    def post(self, request):
+        is_ajax = request.headers.get("X-Requested-With")
+        if is_ajax == "XMLHttpRequest":
+            form = NewLetterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return JsonResponse(
+                    {
+                        "success": True,
+                        "message": "Successfully Subscribed to Newsletter",
+                    },
+                    status=201,
+                )
+            else:
+                return JsonResponse(
+                    {
+                        "success": False,
+                        "message": "Cannot Subscribe to Newsletter"
+                    },
+                    status=400,
+                )
+        else:
+            return JsonResponse(
+                {
+                    "success": False,
+                    "message": "Cannot process, Must be an AJAX XMLHttpRequest",
+                },
+                status=400,
+            )   
 
 
 

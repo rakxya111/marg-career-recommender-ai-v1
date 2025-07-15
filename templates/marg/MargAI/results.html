@@ -28,7 +28,7 @@
     {% endfor %}
   </ul>
   <div class="gohome">
-    <a href="/" class="gohomelink">Go To Home </a>
+    <a href="{% url 'post-list' %}" class="gohomelink">Go To Blogs </a>
   </div>
   {% else %}
   <p>No recommendations found. Please try again.</p>
