@@ -15,7 +15,8 @@
 
   <div class="right-panel">
     <h1>Create Account</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form id="signup-form" method="post" enctype="multipart/form-data">
+
       {% csrf_token %}
 
       <div class="name-fields">
@@ -31,17 +32,17 @@
         </div>
       </div>
 
-      <div class="input-group full">
+      <!-- <div class="input-group full">
         <i class="fas fa-envelope icon"></i>
         {{ form.email }}
         {{ form.email.errors }}
-      </div>
+      </div> -->
       
-      <!-- <div class="input-group full">
+      <div class="input-group full">
         <i class="fas fa-envelope icon"></i>
         {{ form.username }}
         {{ form.username.errors }}
-      </div> -->
+      </div>
 
       <div class="input-group full">
         <i class="fa fa-lock icon"></i>

@@ -3,13 +3,22 @@
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'marg/assets/css/quiz.css' %}">
+      <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 {% endblock %}
 
 {% block content %}
 <div class="quiz-wrapper">
   <div class="quiz" >
     <!-- Start Screen -->
+    <div style="width: 190px; height:30px; ">
+     <a href="/"><button class="btn btn-danger" style="margin-top: -30px;"><i class="fa-solid fa-arrow-left"></i> Go to Home</button></a>  
+    </div>
     <div id="start-screen">
+
       <h2 class="text-center mb-4 title-marg">Welcome to the Marg Carrear Recommendation Quiz</h2>
       <p class="text-center title-marg">Click below to get started!</p>
       <div class="text-center">

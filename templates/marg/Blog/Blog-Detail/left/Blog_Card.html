@@ -6,7 +6,7 @@
         <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="img-fluid rounded" />
 
         <div class="blog-item-content bg-white p-5">
-          <div class="blog-item-meta bg-gray py-1 px-2">
+          <div class="blog-item-meta bg-gray " style="display: flex; flex-direction: row; justify-content: space-evenly; ">
             <span class="text-muted text-capitalize mr-3"
               ><i class="ti-pencil-alt mr-2"></i>{{ post.tag.all | join:"," }}</span
             >
@@ -29,10 +29,10 @@
           <!-- TAGS  -->
 
           <div class="tag-option mt-5 clearfix">
-              <span>Tags:</span>
-              <ul class="float-left list-inline">
+              <span style="font-weight: bold; ">Tags:</span>
+              <ul class="float-left list-inline" style="margin-top:10px;">
                 {% for tag in post.tag.all %}
-                  <li class="list-inline-item">
+                  <li class="list-inline-item tag-item" style="background-color: #F7941D; border-radius: 10px; padding: 8px;" >
                     <a href="{% url 'post-by-tag' tag.id %}" rel="tag">{{ tag.name|lower }}</a>
                   </li>
                 {% endfor %}
@@ -46,23 +46,19 @@
               <li class="list-inline-item">Share:</li>
               <li class="list-inline-item">
                 <a href="#" target="_blank"
-                  ><i class="fab fa-facebook-f" aria-hidden="true"></i
-                ></a>
+                  ><i class="fa-brands fa-facebook"></i></a>
               </li>
               <li class="list-inline-item">
                 <a href="#" target="_blank"
-                  ><i class="fab fa-twitter" aria-hidden="true"></i
-                ></a>
+                  ><i class="fa-brands fa-twitter"></i></a>
               </li>
               <li class="list-inline-item">
                 <a href="#" target="_blank"
-                  ><i class="fab fa-pinterest-p" aria-hidden="true"></i
-                ></a>
+                  ><i class="fa-brands fa-pinterest"></i></a>
               </li>
               <li class="list-inline-item">
                 <a href="#" target="_blank"
-                  ><i class="fab fa-google-plus" aria-hidden="true"></i
-                ></a>
+                  ><i class="fa-brands fa-google-plus"></i></a>
               </li>
             </ul>
           </div>

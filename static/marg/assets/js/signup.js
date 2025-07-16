@@ -1,6 +1,6 @@
 document.getElementById('signup-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('Account created successfully!');
+  // e.preventDefault();
+  // alert('Account created successfully!');
 });
 
 const password = document.getElementById("password");

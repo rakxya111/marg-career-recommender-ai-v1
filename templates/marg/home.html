@@ -3,6 +3,30 @@
 
 {% block extra_css %}
  <link href="{% static 'marg/assets/css/home.css' %}" rel="stylesheet">
+ <style>
+    .section-title {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  color: #ff4500; /* Orangered */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+  margin: 10px 0 30px;
+  position: relative;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background-color: #ff4500;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+ </style>
 {% endblock %}
 
 {% block content %}
@@ -17,4 +41,48 @@
 
 {% block extra_js %}
 <script src="{% static 'marg/assets/js/home.js' %}"></script>
+<script>
+  const counters = document.querySelectorAll('.counter');
+
+  const duration = 5000; // total duration in ms
+
+  const animateCounter = counter => {
+    const target = +counter.getAttribute('data-target');
+    const startTime = performance.now();
+
+    const update = now => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = Math.floor(progress * target);
+
+      counter.innerText = current.toLocaleString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        counter.innerText = target.toLocaleString();
+      }
+    };
+
+    requestAnimationFrame(update);
+  };
+
+  // OPTIONAL: only run when visible
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target); // run only once
+      }
+    });
+  }, {
+    threshold: 0.5 // adjust if needed
+  });
+
+  counters.forEach(counter => {
+    observer.observe(counter);
+  });
+</script>
+
+
 {% endblock %}

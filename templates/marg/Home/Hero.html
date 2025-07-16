@@ -1,11 +1,11 @@
   {% load static %}
   
   <!-- Hero Section -->
-  <header class="hero-section">
+  <header class="hero-section"  style="background-image: url('{% static 'marg/assets/img/HEROO1.png' %}'); background-position : center; background-repeat : no-repeat; ">
     <div class="container">
-      <h2>Find your best-fit<br>career in just a few clicks.</h2>
-      <p>Your journey matters. Discover a career that fits not just your skills, but your passion and purpose too.</p>
-      <a href="#" class="btn btn-warning mt-3">Get Started</a>
+      <h1 style="font-weight: bold; ">Find your best-fit career in just a few clicks.</h1>
+      <h4>Your journey matters. Discover a career that fits not just your skills, but your passion and purpose too.</h4>
+      <a href="{% url 'recommend' %}" class="btn btn-warning mt-3">Get Started</a>
     </div>
     <div class="hero-img">
       <img src="{% static 'marg/assets/img/home page ko manxe haru.png' %}" alt="nav image" >

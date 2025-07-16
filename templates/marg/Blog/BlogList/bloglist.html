@@ -3,19 +3,31 @@
 {% block content %}
 <section class="blog">
   <!-- Search Form -->
-  <form class="d-flex" role="search" action="{% url 'post-search' %}" method="get">
-    <input
-      class="form-control me-2"
-      type="search"
-      name="query"
-      placeholder="Search"
-      aria-label="Search"
-      value="{{ query }}"
-    />
-    <button class="btn btn-outline-success" type="submit">Search</button>
-  </form>
+<form class="d-flex position-relative" role="search" action="{% url 'post-search' %}" method="get">
+  <input
+    class="form-control me-2"
+    type="search"
+    name="query"
+    placeholder="Search"
+    aria-label="Search"
+    value="{{ query }}"
+    id="searchInput"
+  />
+  
+  <!-- Clear button (only shows when there's text) -->
+  <button 
+    type="button" 
+    id="clearSearch" 
+    class="btn btn-sm position-absolute" 
+    style="right: 60px; top: 50%; transform: translateY(-50%); z-index: 10; display: none; background: none; border: none; color: #6c757d;"
+  >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
-  <div class="head">
+  <div class="head" style="margin-top: 60px;">
     <div class="head-title">
       <h2 class="blog-title">Marg Career Blog</h2>
     </div>

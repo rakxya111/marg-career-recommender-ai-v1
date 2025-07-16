@@ -15,27 +15,26 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
 
-
-
-# class HomeView(TemplateView):
-#     template_name = 'marg/base.html'
-
 class HomeView(ListView):
     model = Post
     template_name = 'marg/home.html'
     context_object_name = 'posts'
     queryset = Post.objects.filter(
-        published_at__isnull=False, status="active"
-        ).order_by("-published_at")
-
+        published_at__isnull=False,
+        status='active'
+        ).order_by("-published_at") [:4]
+    
 
 class AboutView(TemplateView):
     template_name = 'marg/about.html'
 
-class PostListCreateView(LoginRequiredMixin,ListView):  
+
+
+class PostListCreateView(LoginRequiredMixin, ListView):  
     model = Post
     template_name = 'marg/Blog/blog.html'
-    context_object_name = "posts"
+    context_object_name = "page_obj"  # Changed from "posts" to "page_obj"
+
 
     def get_queryset(self):
         queryset = Post.objects.filter(
@@ -49,6 +48,7 @@ class PostListCreateView(LoginRequiredMixin,ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = PostForm()  # Add the form to context
+        context['query'] = ''  # Add empty query for template consistency
         return context
 
     def post(self, request, *args, **kwargs):
@@ -75,7 +75,7 @@ class PostListCreateView(LoginRequiredMixin,ListView):
 class PostByTagView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'marg/Blog/blog.html'
-    context_object_name = "posts"
+    context_object_name = "page_obj"
 
     def get_queryset(self):
         query = super().get_queryset()
@@ -113,6 +113,8 @@ class ContactView(View):
             self.template_name,
             {"form": form}
         )
+
+
 
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
@@ -218,11 +220,19 @@ class PostSearchView(View):
         # Use .get() with default to avoid MultiValueDictKeyError
         query = request.GET.get('query', '').strip()
 
-        post_list = Post.objects.filter(
-            Q(title__icontains=query) | Q(description__icontains=query),
-            status='active',
-            published_at__isnull=False
-        ).order_by('-published_at')
+        # If no query, show all posts (same as PostListCreateView)
+        if query:
+            post_list = Post.objects.filter(
+                Q(title__icontains=query) | Q(description__icontains=query),
+                status='active',
+                published_at__isnull=False
+            ).order_by('-published_at')
+        else:
+            # Show all posts when no search query
+            post_list = Post.objects.filter(
+                status='active',
+                published_at__isnull=False
+            ).order_by('-published_at')
 
         paginator = Paginator(post_list, 3)
         page = request.GET.get('page', 1)
@@ -241,7 +251,9 @@ class PostSearchView(View):
                 'form': PostForm(),
             }
         )
-    
+
+
+   
 class NewsletterView(View):
    
     def post(self, request):

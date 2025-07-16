@@ -1,20 +1,31 @@
-{% extends "marg/base.html" %}
-{% load static %}
+{% extends "marg/base.html" %} 
+{% load static %} 
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'marg/assets/css/blog.css' %}">
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-{% endblock %}
+<link rel="stylesheet" href="{% static 'marg/assets/css/blog.css' %}" />
+<link
+  href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+  rel="stylesheet"
+/>
+<!-- Font Awesome CDN -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+{% endblock %} 
 
-{% block content %}
-  {% include 'marg/Blog/BlogList/bloglist.html' %}
 
-{% endblock %}
+
+{% block content %} 
+{% include 'marg/Blog/BlogList/bloglist.html'%} 
+{% endblock %} 
+
 
 {% block extra_js %}
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src="{% static 'marg/assets/js/blog.js' %}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{% static 'marg/assets/js/blog.js' %}"></script>
 <script>
   $(document).ready(function () {
     // Handle Select2
@@ -25,9 +36,51 @@
     });
 
     // Handle form error modal opening
-    if ($('#has-form-errors').val() === 'yes') {
-      $('#postModal').css('display', 'flex');
+    if ($("#has-form-errors").val() === "yes") {
+      $("#postModal").css("display", "flex");
     }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearSearch");
+    const searchForm = document.querySelector('form[role="search"]');
+
+    // Show/hide clear button based on input content
+    function toggleClearButton() {
+      if (searchInput.value.trim().length > 0) {
+        clearBtn.style.display = "block";
+      } else {
+        clearBtn.style.display = "none";
+      }
+    }
+
+    // Initial check
+    toggleClearButton();
+
+    // Show/hide clear button as user types
+    searchInput.addEventListener("input", toggleClearButton);
+
+    // Clear search when clear button is clicked
+    clearBtn.addEventListener("click", function () {
+      searchInput.value = "";
+      toggleClearButton();
+      searchInput.focus();
+
+      // Optional: Submit form to show all posts
+      searchForm.submit();
     });
-  </script>
-  {% endblock %}
+
+    // Clear search input after form submission (if you want this behavior)
+    searchForm.addEventListener("submit", function () {
+      setTimeout(function () {
+        searchInput.value = "";
+        toggleClearButton();
+      }, 100);
+    });
+  });
+</script>
+
+{% endblock %}

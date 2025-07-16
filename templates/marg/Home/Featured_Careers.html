@@ -2,59 +2,26 @@
   <section class="featured-careers-section">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h3 class="section-title">Featured careers</h3>
-      <a href="#" class="btn btn-outline-dark">Career Blogs</a>
+      <h3 class="section-title" style="color: black;">Featured careers</h3>
+      <a href="{% url 'post-list' %}" class="btn btn-outline-dark">Career Blogs</a>
     </div>
 
+
+    {% for career in posts %}
     <!-- Career Row 1 -->
     <div class="career-row">
       <div class="career-img">
-        <img src="../assets/img/engineer.webp" alt="Engineer" />
+        <img src="{{ career.featured_image.url }}" alt="{{ career.title }}" />
       </div>
       <div class="career-content">
-        <h5>Engineer</h5>
+        <h5>{{ career.title }}</h5>
         <p>
-          An engineer builds and maintains the technical side of a website.
-          They turn design ideas into working features using code. Their job
-          is to ensure the site runs smoothly, loads fast, and is secure for
-          users.
+          {{ career.description| striptags | truncatewords:30 }}
         </p>
-        <a href="#" class="btn btn-dark">→  More Info</a>
+        <a href="{% url 'post-detail' career.pk %}" class="btn btn-dark">→  More Info</a>
       </div>
     </div>
+    {% endfor %}
 
-    <!-- Career Row 2 -->
-    <div class="career-row reverse">
-      <div class="career-img">
-        <img src="../assets/img/Dentist.jpg" alt="Dentist" />
-      </div>
-      <div class="career-content">
-        <h5>Dentist</h5>
-        <p>
-          A dentist is a healthcare professional who takes care of your
-          teeth and gums. They treat dental problems like cavities and gum
-          disease and help keep your smile healthy. Dentists also give advice
-          on brushing, flossing, and overall oral hygiene.
-        </p>
-        <a href="#" class="btn btn-dark">→  More Info</a>
-      </div>
-    </div>
-
-    <!-- Career Row 3 -->
-    <div class="career-row">
-      <div class="career-img">
-        <img src="../assets/img/Teacher.webp" alt="Teacher" />
-      </div>
-      <div class="career-content">
-        <h5>Teacher</h5>
-        <p>
-          A teacher helps students learn and grow by sharing knowledge and
-          guidance. They create lessons, explain concepts, and support
-          students in developing skills. A teacher inspires curiosity and
-          encourages learning every day.
-        </p>
-        <a href="#" class="btn btn-dark">→  More Info</a>
-      </div>
-    </div>
   </div>
 </section>

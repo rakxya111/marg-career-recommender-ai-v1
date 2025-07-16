@@ -10,7 +10,6 @@ class CustomUserCreationForm(UserCreationForm):
             'username',
             'first_name',
             'last_name',
-            'email',
             'password1',
             'password2',
             'profile_image',
@@ -23,9 +22,6 @@ class CustomUserCreationForm(UserCreationForm):
             }),
             'last_name': forms.TextInput(attrs={
                 'placeholder': 'Last name',
-            }),
-            'email': forms.EmailInput(attrs={
-                'placeholder': 'Email',
             }),
             'username': forms.EmailInput(attrs={
                 'placeholder': 'Email',
