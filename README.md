@@ -126,6 +126,11 @@ ALLOWED_HOSTS=*
 
 ## 🖼️ Screenshots
 
+### 🔹 Login And Register Page
+
+![Register](https://github.com/user-attachments/assets/e207a8e6-07db-48ed-93ed-1c1ff9f5669b)
+![Login](https://github.com/user-attachments/assets/87e1cb1c-5071-45ac-a2a4-c778778fe018)
+
 ### 🔹 Home Page with Chatbot
 
 ![Home](https://github.com/user-attachments/assets/7f439a9b-fde8-4691-8468-c27e3c13e4a2)
