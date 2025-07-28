@@ -2,7 +2,7 @@
 
 **Marg** is a career recommendation web application designed for recent SEE graduates. It allows users to take a short quiz and receive their top 3 career recommendations using a trained **Random Forest Classifier**. The platform also features **career-related blogs**, a **chatbot** for assistance, **comment sections** for interaction, and a **clean, user-friendly UI** built using **HTML, CSS, and JavaScript**, with a **Django + Scikit-learn** backend.
 
-![Marg Banner](./screenshots/marg-banner.png)
+![Marg Banner](https://github.com/user-attachments/assets/581601a6-0e7e-4f65-ac4d-e0f0deee9f4d)
 
 ---
 
@@ -130,9 +130,13 @@ ALLOWED_HOSTS=*
 
 ![Home](https://github.com/user-attachments/assets/7f439a9b-fde8-4691-8468-c27e3c13e4a2)
 
+### 🔹 Quiz Starting Interface
+
+![Quiz](https://github.com/user-attachments/assets/23098a0d-127b-49be-9552-c7cea0ddbe24)
+
 ### 🔹 Quiz Interface
 
-![Quiz](https://github.com/user-attachments/assets/7f439a9b-fde8-4691-8468-c27e3c13e4a2)
+![Quiz](https://github.com/user-attachments/assets/5514beaa-f8a1-4354-826a-ed711a0b5081)
 
 ### 🔹 Career Results
 
@@ -141,6 +145,10 @@ ALLOWED_HOSTS=*
 ### 🔹 Blog Page
 
 ![Blog](https://github.com/user-attachments/assets/c798828a-5657-4ee6-b401-8cd594998b8d)
+
+### 🔹Create Blog 
+
+![Blog](https://github.com/user-attachments/assets/5b9fd9df-2026-4436-b5e6-9f76c08a2a6e)
 
 ### 🔹 About Us Page
 
