@@ -40,15 +40,15 @@
 
 ## ✨ Features
 
-✅ Career Quiz for recent SEE graduates
-✅ Top 3 career recommendations based on quiz answers
-✅ Machine Learning (Random Forest Classifier) backend
-✅ Blog section with educational content
-✅ User Dashboard to Create, Read, Update, and Delete (CRUD) blog posts
-✅ Chatbot for user guidance
-✅ Comment system on blogs for interaction
-✅ Contact Us and About Us pages
-✅ Clean, intuitive, mobile-friendly UI
+✅ Career Quiz for recent SEE graduates </br>
+✅ Top 3 career recommendations based on quiz answers </br>
+✅ Machine Learning (Random Forest Classifier) backend </br>
+✅ Blog section with educational content </br>
+✅ User Dashboard to Create, Read, Update, and Delete (CRUD) blog posts </br>
+✅ Chatbot for user guidance </br>
+✅ Comment system on blogs for interaction </br>
+✅ Contact Us and About Us pages </br>
+✅ Clean, intuitive, mobile-friendly UI </br>
 
 ---
 
